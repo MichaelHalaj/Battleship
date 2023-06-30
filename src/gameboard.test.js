@@ -35,8 +35,12 @@ describe('Gameboard class', () => {
     expect(gameboard.grid).toEqual(emptyBoard);
   });
   it('Places ships in correct coordinates', () => {
-    gameboard.placeShip('carrier', [0, 0], 'horizontal');
-    gameboard.placeShip('destroyer', [6, 5], 'vertical');
+    expect(gameboard.placeShip('carrier', [0, 0], 'horizontal')).toEqual(true);
+    expect(gameboard.placeShip('destroyer', [6, 5], 'vertical')).toEqual(true);
+    expect(gameboard.grid).toEqual(boardWithShips);
+  });
+  it('Returns false when trying to place ships off the board and does not change the board', () => {
+    expect(gameboard.placeShip('battleship', [0, 7], 'horizontal')).toEqual(false);
     expect(gameboard.grid).toEqual(boardWithShips);
   });
 });

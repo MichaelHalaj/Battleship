@@ -18,17 +18,25 @@ class Gameboard {
   }
 
   placeShip(shipName, coordinates, direction) {
+    // need to check if ship overlaps with another ship
     const ship = new Ship(shipName);
     this.shipList[Gameboard.shipIndexes[shipName] - 1] = ship;
     if (direction === 'horizontal') {
+      if (coordinates[1] + ship.length - 1 >= this.grid[0].length) {
+        return false;
+      }
       for (let i = 0; i < ship.length; i += 1) {
         this.grid[coordinates[0]][coordinates[1] + i] = Gameboard.shipIndexes[shipName];
       }
     } else {
+      if (coordinates[0] + ship.length - 1 >= this.grid.length) {
+        return false;
+      }
       for (let i = 0; i < ship.length; i += 1) {
         this.grid[coordinates[0] + i][coordinates[1]] = Gameboard.shipIndexes[shipName];
       }
     }
+    return true;
   }
 }
 
