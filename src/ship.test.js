@@ -3,7 +3,7 @@ import Ship from './ship';
 
 let ship;
 beforeEach(() => {
-  ship = new Ship(5);
+  ship = new Ship('carrier');
 });
 
 describe('Ship class', () => {

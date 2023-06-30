@@ -23,9 +23,9 @@ let boardWithShips =
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 3, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 3, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 3, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ];
 
@@ -35,6 +35,8 @@ describe('Gameboard class', () => {
     expect(gameboard.grid).toEqual(emptyBoard);
   });
   it('Places ships in correct coordinates', () => {
+    gameboard.placeShip('carrier', [0, 0], 'horizontal');
+    gameboard.placeShip('destroyer', [6, 5], 'vertical');
     expect(gameboard.grid).toEqual(boardWithShips);
   });
 });
