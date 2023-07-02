@@ -105,4 +105,25 @@ describe('Gameboard class', () => {
     expect(gameboard.placeShip('destroyer', [6, 5], 'horizontal')).toEqual(false);
     expect(gameboard.grid).toEqual(boardWithShips);
   });
+  describe('receiveAttack', () => {
+    const missedBoard = [
+      [1, 1, 1, 1, 1, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, -1, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, -1, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 3, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 3, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 3, 0, 0, 0, 0],
+      [0, -1, 0, 0, 0, 0, 0, 0, -1, 0],
+    ];
+    it('Correctly marks missed attacks', () => {
+      gameboard.receiveAttack([2, 8]);
+      gameboard.receiveAttack([5, 2]);
+      gameboard.receiveAttack([9, 1]);
+      gameboard.receiveAttack([9, 8]);
+      expect(gameboard.grid).toEqual(missedBoard);
+    });
+  });
 });

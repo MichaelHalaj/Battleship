@@ -72,6 +72,15 @@ class Gameboard {
     this.shipList[Gameboard.shipIndexes[shipName] - 1] = ship;
     return true;
   }
+
+  receiveAttack(coordinates) {
+    const coordValue = this.grid[coordinates[0]][coordinates[1]];
+    if (coordValue >= 1) {
+      this.shipList[coordValue - 1].hit();
+    } else {
+      this.grid[coordinates[0]][coordinates[1]] = -1;
+    }
+  }
 }
 
 export default Gameboard;

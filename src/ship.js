@@ -22,6 +22,7 @@ class Ship {
 
   hit() {
     if (this.isSunk()) {
+      this.sunk = true;
       return;
     }
     this.hitCount += 1;
