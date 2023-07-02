@@ -12,9 +12,40 @@ class Gameboard {
     'patrol boat': 5,
   };
 
+  // -2 -> miss
+  // -1 -> hit
+
   constructor(dimension = 10) {
     this.grid = [...Array(dimension)].map(() => Array(dimension).fill(0));
     this.shipList = Array(5).fill(undefined);
+  }
+
+  static shipsOverlap(shipA, shipACoord, directionA, shipB, shipBCoord, directionB) {
+    const l1 = shipACoord;
+    const r1 = directionA === 'horizontal'
+      ? [shipACoord[0] + 1, shipACoord[1] + shipA.length]
+      : [shipACoord[0] + shipA.length - 1, shipACoord[1] + 1];
+    console.log(l1 + ' ' + r1);
+    // console.log(r1);
+    const l2 = shipBCoord;
+    const r2 = directionB === 'horizontal'
+      ? [shipBCoord[0] + 1, shipBCoord[1] + shipB.length + 1]
+      : [shipBCoord[0] + shipB.length, shipBCoord[1] + 1];
+    /* if (l1[0] === r1[0] || l1[1] === r1[1] || l2[0] === r2[0] || l2[1] === r2[1]) {
+      return false;
+    } */
+    console.log(l2 + ' ' + r2);
+    // console.log(r2);
+    if (l1[0] > r2[0] || l2[0] > r1[0]) {
+      return false;
+    }
+    if (r1[1] > l2[1] || r2[1] > l1[1]) {
+      return false;
+    }
+    /* if (l1[0] < r2[0] && r1[0] > l2[0] && l1[1] > r2[1] && r2[1] < l1[1]) {
+      return true;
+    } */
+    return true;
   }
 
   placeShip(shipName, coordinates, direction) {
