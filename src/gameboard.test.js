@@ -125,5 +125,15 @@ describe('Gameboard class', () => {
       gameboard.receiveAttack([9, 8]);
       expect(gameboard.grid).toEqual(missedBoard);
     });
+    it('Correctly marks hit attacks', () => {
+      gameboard.receiveAttack([0, 0]);
+      expect(gameboard.shipList[0].hitCount).toEqual(1);
+      gameboard.receiveAttack([0, 4]);
+      expect(gameboard.shipList[0].hitCount).toEqual(2);
+      for (let i = 0; i < 3; i += 1) {
+        gameboard.receiveAttack([6 + i, 5]);
+      }
+      expect(gameboard.shipList[2].isSunk()).toEqual(true);
+    });
   });
 });
