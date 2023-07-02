@@ -43,14 +43,15 @@ describe('Gameboard class', () => {
     expect(gameboard.grid).toEqual(boardWithShips);
     expect(gameboard.placeShip('patrol boat', [9, 0], 'vertical')).toEqual(false);
     expect(gameboard.grid).toEqual(boardWithShips);
+    expect(gameboard.placeShip('submarine', [10, 10], 'vertical')).toEqual(false);
   });
   describe('Test shipOverlaps', () => {
     it('Returns true', () => {
       expect(
         gameboard.shipOverlaps(
           new Ship('destroyer'),
-          'horizontal',
           [0, 0],
+          'horizontal',
         ),
       ).toEqual(true);
     });
@@ -58,8 +59,8 @@ describe('Gameboard class', () => {
       expect(
         gameboard.shipOverlaps(
           new Ship('destroyer'),
-          'horizontal',
           [0, 4],
+          'horizontal',
         ),
       ).toEqual(true);
     });
@@ -67,8 +68,8 @@ describe('Gameboard class', () => {
       expect(
         gameboard.shipOverlaps(
           new Ship('battleship'),
-          'vertical',
           [0, 2],
+          'vertical',
         ),
       ).toEqual(true);
     });
@@ -76,8 +77,8 @@ describe('Gameboard class', () => {
       expect(
         gameboard.shipOverlaps(
           new Ship('destroyer'),
-          'horizontal',
           [6, 3],
+          'horizontal',
         ),
       ).toEqual(true);
     });
@@ -85,8 +86,8 @@ describe('Gameboard class', () => {
       expect(
         gameboard.shipOverlaps(
           new Ship('destroyer'),
-          'horizontal',
           [1, 0],
+          'horizontal',
         ),
       ).toEqual(false);
     });
@@ -94,10 +95,14 @@ describe('Gameboard class', () => {
       expect(
         gameboard.shipOverlaps(
           new Ship('battleship'),
-          'horizontal',
           [0, 5],
+          'horizontal',
         ),
       ).toEqual(false);
     });
+  });
+  it('Returns false when attempting to place ship on existing ship', () => {
+    expect(gameboard.placeShip('destroyer', [6, 5], 'horizontal')).toEqual(false);
+    expect(gameboard.grid).toEqual(boardWithShips);
   });
 });

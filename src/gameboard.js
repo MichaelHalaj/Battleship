@@ -20,7 +20,7 @@ class Gameboard {
     this.shipList = Array(5).fill(undefined);
   }
 
-  shipOverlaps(ship, direction, coordinates) {
+  shipOverlaps(ship, coordinates, direction) {
     if (direction === 'horizontal') {
       for (let i = 0; i < ship.length; i += 1) {
         if (this.grid[coordinates[0]][coordinates[1] + i] !== 0) {
@@ -37,25 +37,39 @@ class Gameboard {
     return false;
   }
 
+  shipOutOfBounds(ship, coordinates, direction) {
+    if (direction === 'horizontal') {
+      if (coordinates[1] + ship.length - 1 >= this.grid[0].length) {
+        return true;
+      }
+    } else if (coordinates[0] + ship.length - 1 >= this.grid.length) {
+      return true;
+    }
+    return false;
+  }
+
+  shipPlacementIsValid(ship, coordinates, direction) {
+    return !this.shipOutOfBounds(ship, coordinates, direction)
+    && !this.shipOverlaps(ship, coordinates, direction);
+  }
+
   placeShip(shipName, coordinates, direction) {
     // need to check if ship overlaps with another ship
     const ship = new Ship(shipName);
-    this.shipList[Gameboard.shipIndexes[shipName] - 1] = ship;
+
+    if (!this.shipPlacementIsValid(ship, coordinates, direction)) {
+      return false;
+    }
     if (direction === 'horizontal') {
-      if (coordinates[1] + ship.length - 1 >= this.grid[0].length) {
-        return false;
-      }
       for (let i = 0; i < ship.length; i += 1) {
         this.grid[coordinates[0]][coordinates[1] + i] = Gameboard.shipIndexes[shipName];
       }
     } else {
-      if (coordinates[0] + ship.length - 1 >= this.grid.length) {
-        return false;
-      }
       for (let i = 0; i < ship.length; i += 1) {
         this.grid[coordinates[0] + i][coordinates[1]] = Gameboard.shipIndexes[shipName];
       }
     }
+    this.shipList[Gameboard.shipIndexes[shipName] - 1] = ship;
     return true;
   }
 }
