@@ -81,6 +81,15 @@ class Gameboard {
       this.grid[coordinates[0]][coordinates[1]] = -1;
     }
   }
+
+  allShipsSunk() {
+    for (let i = 0; i < this.shipList.length; i += 1) {
+      if (this.shipList[i] !== undefined && !this.shipList[i].isSunk()) {
+        return false;
+      }
+    }
+    return true;
+  }
 }
 
 export default Gameboard;

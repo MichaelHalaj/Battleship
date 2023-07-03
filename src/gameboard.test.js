@@ -136,4 +136,13 @@ describe('Gameboard class', () => {
       expect(gameboard.shipList[2].isSunk()).toEqual(true);
     });
   });
+  it('Returns false when all ships are not yet sunk', () => {
+    expect(gameboard.allShipsSunk()).toEqual(false);
+  });
+  it('Returns true when all ships are sunk', () => {
+    for (let i = 0; i < 5; i += 1) {
+      gameboard.receiveAttack([0, 0 + i]);
+    }
+    expect(gameboard.allShipsSunk()).toEqual(true);
+  });
 });
