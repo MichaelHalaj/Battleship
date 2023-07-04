@@ -15,9 +15,12 @@ class Gameboard {
   // -2 -> miss
   // -1 -> hit
 
+  dimension;
+
   constructor(dimension = 10) {
     this.grid = [...Array(dimension)].map(() => Array(dimension).fill(0));
     this.shipList = Array(5).fill(undefined);
+    this.dimension = dimension;
   }
 
   shipOverlaps(ship, coordinates, direction) {
