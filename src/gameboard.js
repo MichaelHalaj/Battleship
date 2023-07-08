@@ -17,7 +17,9 @@ class Gameboard {
 
   dimension;
 
-  constructor(dimension = 10) {
+  static standardSize = 10;
+
+  constructor(dimension = Gameboard.standardSize) {
     this.grid = [...Array(dimension)].map(() => Array(dimension).fill(0));
     this.shipList = Array(5).fill(undefined);
     this.dimension = dimension;
