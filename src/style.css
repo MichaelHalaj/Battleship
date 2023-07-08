@@ -19,13 +19,27 @@ body {
     background-color: #334155;
     border-radius: 5px;
 }
+.content {
+    padding: 100px;
+    display: flex;
+    gap: 100px;
+}
 .title {
     color: #a3e635;
     padding: 7px;
 }
+.grid {
+    background-color: #a3e635;
+    padding: 2px;
+}
 .grid-item {
-    width: 20px;
-    height: 20px;
-    background-color: black;
-    border: 1px solid white;
+    width: 30px;
+    height: 30px;
+    background-color: #0a0a0a;
+}
+.grid-item:hover {
+    cursor: pointer;
+}
+.ship-hover {
+    background-color: #334155;
 }
