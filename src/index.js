@@ -12,31 +12,7 @@ const grid2 = document.getElementById('grid2');
 
 const startBtn = document.querySelector('.start');
 
-const gridItems = document.querySelectorAll('.grid-item');
 
-function stringID(gridNumber, row, col) {
-  return `grid-${gridNumber}-item-${row}-${col}`;
-}
-
-console.log(gridItems.find(item => item.id === 'grid-1-item-0-0'));
-
-function updatePlayerBoardVisual(grid) {
-  
-}
-function gameloop() {
-  const player1 = new Player('Player');
-  const player2 = new Player();
-  player1.gameboard.placeShip('carrier', [0, 0], 'horizontal');
-  player1.gameboard.placeShip('battleship', [4, 3], 'vertical');
-  player1.gameboard.placeShip('destroyer', [6, 9], 'vertical');
-  player1.gameboard.placeShip('submarine', [9, 2], 'horizontal');
-  player1.gameboard.placeShip('patrol boat', [2, 8], 'vertical');
-  console.log(player1.gameboard);
-}
-
-startBtn.addEventListener('click', () => {
-  gameloop();
-});
 
 let gridCount = 1;
 grids.forEach((grid) => {
@@ -52,6 +28,8 @@ grids.forEach((grid) => {
   gridCount += 1;
 });
 
+const gridItems = document.querySelectorAll('.grid-item');
+
 gridItems.forEach((item) => {
   item.addEventListener('mouseover', () => {
     const split = item.id.split('-');
@@ -61,7 +39,7 @@ gridItems.forEach((item) => {
       const shipItem = document.getElementById(newID);
       // const shipItem = Array.from(gridItems).find(node => node.id == newID);
       // console.log(shipItem);
-      shipItem.classList.add('ship-hover');
+      shipItem.classList.add('ship-selected');
     }
   });
   item.addEventListener('mouseleave', () => {
@@ -71,7 +49,41 @@ gridItems.forEach((item) => {
       const newID = `${split[0]}-${split[1]}-${split[2]}-${+split[3] + i}-${split[4]}`;
       const shipItem = document.getElementById(newID);
       // console.log(shipItem);
-      shipItem.classList.remove('ship-hover');
+      shipItem.classList.remove('ship-selected');
     }
   });
+});
+
+function stringID(gridNumber, row, col) {
+  return `grid-${gridNumber}-item-${row}-${col}`;
+}
+
+console.log();
+
+function updatePlayerBoardVisual(gridNumber, player) {
+  const gridArray = Array.from(gridItems);
+  const size = player.gameboard.grid.length;
+  for (let i = 0; i < size; i += 1) {
+    for (let j = 0; j < size; j += 1) {
+      if (player.gameboard.grid[i][j] >= 1) {
+        const a = gridArray.find((val) =>  val.id === stringID(gridNumber, i, j));
+        a.classList.add('ship-selected');
+      }
+    }
+  }
+}
+function gameloop() {
+  const player1 = new Player('Player');
+  const player2 = new Player();
+  player1.gameboard.placeShip('carrier', [0, 0], 'horizontal');
+  player1.gameboard.placeShip('battleship', [4, 3], 'vertical');
+  player1.gameboard.placeShip('destroyer', [6, 9], 'vertical');
+  player1.gameboard.placeShip('submarine', [9, 2], 'horizontal');
+  player1.gameboard.placeShip('patrol boat', [2, 8], 'vertical');
+  console.log(player1.gameboard);
+  updatePlayerBoardVisual(1, player1);
+}
+
+startBtn.addEventListener('click', () => {
+  gameloop();
 });

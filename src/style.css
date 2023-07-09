@@ -41,7 +41,7 @@ body, html {
 .grid-item:hover {
     cursor: pointer;
 }
-.ship-hover {
+.ship-selected {
     background-color: #a3e635   ;
 }
 button {
