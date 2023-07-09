@@ -1,4 +1,4 @@
-body {
+body, html {
     font-family: 'PT Sans', sans-serif;
     display: flex;
     justify-content: center;
@@ -36,10 +36,26 @@ body {
     width: 30px;
     height: 30px;
     background-color: #0a0a0a;
+    transition: background-color 200ms ease-in-out;
 }
 .grid-item:hover {
     cursor: pointer;
 }
 .ship-hover {
-    background-color: #334155;
+    background-color: #a3e635   ;
+}
+button {
+    border: 2px solid #a3e635;
+    outline: none;
+    font-family: 'PT Sans', sans-serif;
+    background-color: rgba(0, 0, 0, 0);
+    color: #a3e635;
+    border-radius: 2px;
+    font-size: 30px;
+    transition: all 200ms ease-in-out;
+}
+button:hover {
+    color:#334155;
+    background-color: #a3e635;
+    cursor: pointer;
 }

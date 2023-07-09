@@ -28,7 +28,8 @@ gridItems.forEach((item) => {
     for (let i = 0; i < shipSize; i += 1) {
       const newID = `#${split[0]}-${split[1]}-${split[2]}-${+split[3] + i}-${split[4]}`;
       const shipItem = document.querySelector(newID);
-      console.log(shipItem);
+      // const shipItem = Array.from(gridItems).find(node => node.id == newID);
+      // console.log(shipItem);
       shipItem.classList.add('ship-hover');
     }
   });
@@ -38,8 +39,8 @@ gridItems.forEach((item) => {
     for (let i = 0; i < shipSize; i += 1) {
       const newID = `#${split[0]}-${split[1]}-${split[2]}-${+split[3] + i}-${split[4]}`;
       const shipItem = document.querySelector(newID);
-      console.log(shipItem);
+      // console.log(shipItem);
       shipItem.classList.remove('ship-hover');
     }
-  })
+  });
 });
